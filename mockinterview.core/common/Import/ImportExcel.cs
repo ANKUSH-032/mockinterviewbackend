@@ -59,7 +59,7 @@ namespace mockinterview.core.common.Import
                 worksheet.Cells[i, colDataCounter++].Value = row.RoleID;
                 worksheet.Cells[i, colDataCounter++].Value = row.Gender;
                 worksheet.Cells[i, colDataCounter++].Value = row.Skill;
-                if (row.IsDuplicate.ToLower() == "yes")
+                if (row.IsDuplicate!.ToLower() == "yes")
                 {
                     //var cell = worksheet.Cells[i, colDataCounter++];
                     //cell.Value = row.IsDuplicate;

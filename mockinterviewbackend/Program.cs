@@ -2,13 +2,24 @@
 
 
 
+using Microsoft.OpenApi.Models;
 using mockinterview.core.Interface;
 using mockinterview.infrastructure;
+using Mockinterview.Generic;
 using OfficeOpenXml;
 using System.ComponentModel;
+using System.Text.Json;
 using LicenseContext = OfficeOpenXml.LicenseContext;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add(new ValidationFilter());
+}).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
 
 LicenseContext context = LicenseContext.NonCommercial; // Set the LicenseContext
 
@@ -39,8 +50,35 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setup =>
+{
+    setup.EnableAnnotations();
+    setup.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeeManagement.API", Version = "v1" });
 
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                {
+                        jwtSecurityScheme, Array.Empty<string>() }
+                });
+});
+builder.Services.AddScoped<ValidationFilter>();
+builder.Services.AddScoped<IUserInterface, UserRepositories>();
 builder.Services.AddScoped<IBulkImportRepository, BulkImportRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
@@ -56,6 +94,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllers();
