@@ -18,7 +18,7 @@ namespace Mockinterview.Generic
         static Authenticates()
         {
             var builder = new ConfigurationBuilder()
-                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                 .  SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                  .AddJsonFile("appsettings.json");
             _iconfiguration = builder.Build();
 

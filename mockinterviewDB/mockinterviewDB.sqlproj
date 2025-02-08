@@ -72,5 +72,23 @@
     <Build Include="dbo\User Defined Types\bulkQuestionInsert.sql" />
     <Build Include="dbo\User Defined Types\bluckQuestionInsert.sql" />
     <Build Include="dbo\User Defined Types\bluckEmployeeInsert.sql" />
+    <Build Include="dbo\Tables\tblUsers.sql" />
+    <Build Include="dbo\Tables\tblNumberOfInterview.sql" />
+    <Build Include="dbo\Tables\tblMasterRole.sql" />
+    <Build Include="dbo\Tables\tblCandidate.sql" />
+    <Build Include="dbo\Tables\tblAnswer.sql" />
+    <Build Include="dbo\Stored Procedures\uspUserUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\uspUserInsert.sql" />
+    <Build Include="dbo\Stored Procedures\uspUserGetList.sql" />
+    <Build Include="dbo\Stored Procedures\uspUserGetDetails.sql" />
+    <Build Include="dbo\Stored Procedures\uspUserDetailsGet.sql" />
+    <Build Include="dbo\Stored Procedures\uspUserDelete.sql" />
+    <Build Include="dbo\Stored Procedures\uspCandidateUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\uspCandidateInsert.sql" />
+    <Build Include="dbo\Stored Procedures\uspCandidateGetList.sql" />
+    <Build Include="dbo\Stored Procedures\uspCandidateGetDetails.sql" />
+    <Build Include="dbo\Stored Procedures\uspCandidateDelete.sql" />
+    <Build Include="dbo\Stored Procedures\uspAnswerInsert.sql" />
+    <Build Include="dbo\User Defined Types\AnswerInsertType.sql" />
   </ItemGroup>
 </Project>
