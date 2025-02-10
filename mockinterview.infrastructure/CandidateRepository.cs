@@ -18,14 +18,14 @@ namespace mockinterview.infrastructure
     {
         private static string _con = string.Empty;
         private static IConfigurationRoot? _iconfiguration;
-        public CandidateRepository()
+        public CandidateRepository()    
         {
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                  .AddJsonFile("appsettings.json");
             _iconfiguration = builder.Build();
-            _con = _iconfiguration["ConnectionStrings:DataAccessConnection"]!;
+            _con = _iconfiguration["ConnectionStrings:DataConnect"]!;
         }
         public static IDbConnection Connection
         {
@@ -46,7 +46,6 @@ namespace mockinterview.infrastructure
                 CandidateInsert.Email,
                 CandidateInsert.ContactNo,
                 CandidateInsert.Address,
-                CandidateInsert.HospitalName,
                 CandidateInsert.RoleID,
                 CandidateInsert.ZipCode,
                 CandidateInsert.Gender,
@@ -93,7 +92,6 @@ namespace mockinterview.infrastructure
                 CandidateUpdate.LastName,
                 CandidateUpdate.Email,
                 CandidateUpdate.Address,
-                CandidateUpdate.HospitalName,
                 CandidateUpdate.CandidateId,
                 CandidateUpdate.Gender,
                 CandidateUpdate.ContactNo,

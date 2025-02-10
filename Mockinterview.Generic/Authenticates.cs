@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -22,7 +23,7 @@ namespace Mockinterview.Generic
                  .AddJsonFile("appsettings.json");
             _iconfiguration = builder.Build();
 
-            _con = _iconfiguration["ConnectionStrings:DataAccessConnection"];
+            _con = _iconfiguration["ConnectionStrings:DataConnect"];
             _secretKey = _iconfiguration["AppSettings:Secret"];
         }
         public static IDbConnection Connection
@@ -117,6 +118,30 @@ namespace Mockinterview.Generic
             passwordHash = Encoding.ASCII.GetBytes(myHash);
         }
 
+        public static System.Data.DataTable ConvertToDataTable<T>(List<T> items)
+        {
+            System.Data.DataTable dataTable = new System.Data.DataTable(typeof(T).Name);
+            //Get all the properties by using reflection
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name);
+            }
+            if (items != null && items.Count > 0)
+            {
+                foreach (T item in items)
+                {
+                    var values = new object[Props.Length];
+                    for (int i = 0; i < Props.Length; i++)
+                    {
+                        values[i] = Props[i].GetValue(item) ?? DBNull.Value;
 
+                    }
+                    dataTable.Rows.Add(values);
+                }
+            }
+            return dataTable;
+        }
     }
 }

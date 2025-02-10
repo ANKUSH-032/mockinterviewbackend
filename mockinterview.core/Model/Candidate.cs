@@ -28,12 +28,11 @@ namespace mockinterview.core.Model
 
         public string? Email { get; set; }
 
-        [Required, StringLength(50, ErrorMessage = "{0} must be at least {2} characters long.", MinimumLength = 2)]
-        public string? RoleID { get; set; }
+        //[Required, StringLength(50, ErrorMessage = "{0} must be at least {2} characters long.", MinimumLength = 2)]
+        public string? RoleID { get; set; } = "1";
         [Required, StringLength(50, ErrorMessage = "{0} must be at least {2} characters long.", MinimumLength = 2)]
         public string? Address { get; set; }
         [Required, StringLength(50, ErrorMessage = "{0} must be at least {2} characters long.", MinimumLength = 2)]
-        public string? HospitalName { get; set; }
 
         public string? ZipCode { get; set; }
         public string? Gender { get; set; }

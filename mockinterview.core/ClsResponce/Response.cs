@@ -11,7 +11,7 @@ namespace BluckImport.Core.ClsResponce
     {
 
         public string? Message { get; set; }
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
         public string? Data { get; set; }
         public List<string> Errors { get; set; }
     }

@@ -34,7 +34,7 @@ ExcelPackage.LicenseContext = context;
 //                   .AllowAnyMethod();
 //        });
 //});
-string MyAllowSpecificOrigins = "http://localhost:7003/api";
+string MyAllowSpecificOrigins = "https://localhost:44385/api";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -80,6 +80,9 @@ builder.Services.AddScoped<ValidationFilter>();
 builder.Services.AddScoped<IUserInterface, UserRepositories>();
 builder.Services.AddScoped<IBulkImportRepository, BulkImportRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
+builder.Services.AddScoped<IUserInterface, UserRepositories>();
+builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 
 var app = builder.Build();
 

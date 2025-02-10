@@ -19,7 +19,7 @@ namespace mockinterviewbackend.Controllers
         [HttpPost("answer")]
         public async Task<IActionResult> AnswerInsert([FromBody] AnswerInsert answerInsert)
         {
-            var response = await _answerRepository.AddAnswer(answerInsert);
+            Response response = await _answerRepository.AddAnswer(answerInsert);
 
             if (!response.Status)
             {
